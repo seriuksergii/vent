@@ -399,6 +399,21 @@
       gap: 48px;
       align-items: center;
       padding-bottom: 32px;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .hero-content,
+    .hero-visual {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    /* Hero завжди видимий — без зсуву анімації */
+    .hero.section.section--from-left,
+    .hero.section.section--from-right {
+      transform: none;
+      opacity: 1;
     }
 
     .badge-ukraine {
@@ -481,6 +496,7 @@
 
     .hero-visual img {
       width: 100%;
+      max-width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
@@ -1140,9 +1156,21 @@
 
       .hero {
         grid-template-columns: 1fr;
-        text-align: center;
+        justify-items: center;
         gap: 24px;
         padding-bottom: 16px;
+      }
+
+      .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        text-align: center;
+      }
+
+      .hero-visual {
+        width: 100%;
       }
 
       .hero-bullets {
@@ -1191,6 +1219,7 @@
     @media (max-width: 1024px) {
       .section--from-left,
       .section--from-right,
+      .section.visible,
       .reveal-from-left,
       .reveal-from-right {
         transform: none;
