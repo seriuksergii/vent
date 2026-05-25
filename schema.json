@@ -1,0 +1,102 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://vodovitrodym.ua/#website",
+      "url": "https://vodovitrodym.ua/",
+      "name": "ВодоВітроДим",
+      "description": "Виробник оцинкованих систем водовідведення, вентиляції та димоходів у Харкові",
+      "inLanguage": "uk-UA",
+      "publisher": { "@id": "https://vodovitrodym.ua/#organization" }
+    },
+    {
+      "@type": ["Organization", "LocalBusiness", "Manufacturer"],
+      "@id": "https://vodovitrodym.ua/#organization",
+      "name": "ВодоВітроДим",
+      "url": "https://vodovitrodym.ua/",
+      "logo": "https://vodovitrodym.ua/favicon.svg",
+      "image": "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1200&q=80",
+      "description": "Український виробник жестяних та оцинкованих виробів: водовідведення, вентиляція, димоходи, покрівельні елементи.",
+      "telephone": "+38-050-751-92-43",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+38-050-751-92-43",
+          "contactType": "sales",
+          "areaServed": "UA",
+          "availableLanguage": "uk"
+        },
+        {
+          "@type": "ContactPoint",
+          "telephone": "+38-097-428-69-00",
+          "contactType": "sales",
+          "areaServed": "UA",
+          "availableLanguage": "uk"
+        }
+      ],
+      "email": "Vodovitrodym@ukr.net",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Харків",
+        "addressRegion": "Харківська область",
+        "addressCountry": "UA"
+      },
+      "areaServed": { "@type": "Country", "name": "Україна" },
+      "priceRange": "$$",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      },
+      "sameAs": []
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://vodovitrodym.ua/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Де купити оцинковані жолоби та водовідведення в Харкові?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ВодоВітроДим виготовляє системи водовідведення на власному заводі в Харкові: жолоби, труби, лійки, монтаж під ключ. Доставка по Україні. Телефони: +38 (050) 751-92-43, +38 (097) 428-69-00."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи виготовляєте повітроводи та вентиляційні короби нестандартних розмірів?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так. Прямокутні та круглі повітроводи, фасонні частини — по ГОСТ і за кресленнями замовника, сталь 0,5–1,2 мм."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Які димоходи виробляє ВодоВітроДим?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Одностінні та сендвіч-дімоходи Ø100–600 мм, іскрогасники, ковпаки, дефлектори — для котлів, камінів і пічей."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи є доставка оцинкованих виробів по Україні?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так. Власний транспорт по Харкову та області, відправка Новою Поштою та іншими перевізниками в усі регіони."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як отримати прайс на оцинковані вироби?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Натисніть «Вивантажити прайс» на сайті або зателефонуйте +38 (050) 751-92-43 або +38 (097) 428-69-00. Для нестандарту — надішліть креслення."
+          }
+        }
+      ]
+    }
+  ]
+}
