@@ -1,5 +1,5 @@
 /** Замініть на ваш реальний домен перед індексацією в Google Search Console */
-const SITE_URL = 'https://vodovitrodym.ua';
+const SITE_URL = 'https://vodovitrodym.com.ua';
 
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
@@ -11,7 +11,11 @@ function initPageScroll() {
 
   // Після F5 браузер часто залишає #ctaSection / #contacts — відкриваємо зверху
   if (navType === 'reload' && hash) {
-    history.replaceState(null, '', window.location.pathname + window.location.search);
+    history.replaceState(
+      null,
+      '',
+      window.location.pathname + window.location.search,
+    );
     window.scrollTo(0, 0);
     return;
   }
@@ -23,7 +27,11 @@ function initPageScroll() {
 
 window.addEventListener('load', initPageScroll);
 window.addEventListener('pageshow', (event) => {
-  if ((event.persisted || performance.getEntriesByType('navigation')[0]?.type === 'back_forward') && !window.location.hash) {
+  if (
+    (event.persisted ||
+      performance.getEntriesByType('navigation')[0]?.type === 'back_forward') &&
+    !window.location.hash
+  ) {
     window.scrollTo(0, 0);
   }
 });
@@ -41,9 +49,13 @@ const burgerBtn = document.getElementById('burgerBtn');
 const navMobile = document.getElementById('navMobile');
 const navClose = document.getElementById('navClose');
 
-window.addEventListener('scroll', () => {
-  siteHeader.classList.toggle('is-scrolled', window.scrollY > 24);
-}, { passive: true });
+window.addEventListener(
+  'scroll',
+  () => {
+    siteHeader.classList.toggle('is-scrolled', window.scrollY > 24);
+  },
+  { passive: true },
+);
 siteHeader.classList.toggle('is-scrolled', window.scrollY > 24);
 
 function openMobileNav() {
@@ -70,16 +82,22 @@ burgerBtn.addEventListener('click', () => {
   }
 });
 navClose.addEventListener('click', closeMobileNav);
-document.querySelectorAll('.nav-mobile-link').forEach(link => {
+document.querySelectorAll('.nav-mobile-link').forEach((link) => {
   link.addEventListener('click', closeMobileNav);
 });
 
 const sections = document.querySelectorAll('.section');
-const revealSelectors = '.manufacturer-feature, .manufacturer-text, .products-header, .direction-label, .product-card, .why-card, .step-card, .trust-item, .faq-item';
+const revealSelectors =
+  '.manufacturer-feature, .manufacturer-text, .products-header, .direction-label, .product-card, .why-card, .step-card, .trust-item, .faq-item';
 
 sections.forEach((sec, index) => {
-  if (!sec.classList.contains('section--from-left') && !sec.classList.contains('section--from-right')) {
-    sec.classList.add(index % 2 === 0 ? 'section--from-left' : 'section--from-right');
+  if (
+    !sec.classList.contains('section--from-left') &&
+    !sec.classList.contains('section--from-right')
+  ) {
+    sec.classList.add(
+      index % 2 === 0 ? 'section--from-left' : 'section--from-right',
+    );
   }
   sec.querySelectorAll(revealSelectors).forEach((el, i) => {
     el.classList.add(i % 2 === 0 ? 'reveal-from-left' : 'reveal-from-right');
@@ -87,22 +105,25 @@ sections.forEach((sec, index) => {
   });
 });
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      if (entry.target.id === 'trustSection') animateCounters();
-    }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        if (entry.target.id === 'trustSection') animateCounters();
+      }
+    });
+  },
+  { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
+);
 
-sections.forEach(sec => observer.observe(sec));
+sections.forEach((sec) => observer.observe(sec));
 
 let countersDone = false;
 function animateCounters() {
   if (countersDone) return;
   countersDone = true;
-  document.querySelectorAll('[data-count]').forEach(el => {
+  document.querySelectorAll('[data-count]').forEach((el) => {
     const target = +el.dataset.count;
     const prefix = el.dataset.prefix || '';
     const suffix = el.dataset.suffix || '';
@@ -119,7 +140,10 @@ function animateCounters() {
 }
 
 const trustSection = document.getElementById('trustSection');
-if (trustSection && trustSection.getBoundingClientRect().top < window.innerHeight) {
+if (
+  trustSection &&
+  trustSection.getBoundingClientRect().top < window.innerHeight
+) {
   animateCounters();
 }
 
@@ -137,7 +161,7 @@ function triggerFileDownload(blob, filename) {
 async function downloadPriceList() {
   const priceFiles = [
     { path: 'price.pdf', name: 'vodovitrodym_price.pdf' },
-    { path: 'price.html', name: 'vodovitrodym_price.html' }
+    { path: 'price.html', name: 'vodovitrodym_price.html' },
   ];
   for (const { path, name } of priceFiles) {
     try {
@@ -146,7 +170,9 @@ async function downloadPriceList() {
         triggerFileDownload(await res.blob(), name);
         return;
       }
-    } catch (_) { /* наступний файл */ }
+    } catch (_) {
+      /* наступний файл */
+    }
   }
   const link = document.createElement('a');
   link.href = 'price.html';
@@ -156,16 +182,19 @@ async function downloadPriceList() {
   document.body.removeChild(link);
 }
 
-document.querySelectorAll('.download-price').forEach(btn => {
+document.querySelectorAll('.download-price').forEach((btn) => {
   btn.addEventListener('click', downloadPriceList);
 });
 
-document.querySelectorAll('.product-card, .manufacturer-feature').forEach(card => {
-  card.addEventListener('mouseenter', () => {
-    card.style.transition = 'transform 0.2s, border-color 0.2s, box-shadow 0.2s';
-    card.style.transform = 'scale(1.02)';
+document
+  .querySelectorAll('.product-card, .manufacturer-feature')
+  .forEach((card) => {
+    card.addEventListener('mouseenter', () => {
+      card.style.transition =
+        'transform 0.2s, border-color 0.2s, box-shadow 0.2s';
+      card.style.transform = 'scale(1.02)';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
   });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-  });
-});

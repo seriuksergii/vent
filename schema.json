@@ -3,19 +3,19 @@
   "@graph": [
     {
       "@type": "WebSite",
-      "@id": "https://vodovitrodym.ua/#website",
-      "url": "https://vodovitrodym.ua/",
+      "@id": "https://vodovitrodym.com.ua/#website",
+      "url": "https://vodovitrodym.com.ua/",
       "name": "ВодоВітроДим",
       "description": "Виробник оцинкованих систем водовідведення, вентиляції та димоходів у Харкові",
       "inLanguage": "uk-UA",
-      "publisher": { "@id": "https://vodovitrodym.ua/#organization" }
+      "publisher": { "@id": "https://vodovitrodym.com.ua/#organization" }
     },
     {
       "@type": ["Organization", "LocalBusiness", "Manufacturer"],
-      "@id": "https://vodovitrodym.ua/#organization",
+      "@id": "https://vodovitrodym.com.ua/#organization",
       "name": "ВодоВітроДим",
-      "url": "https://vodovitrodym.ua/",
-      "logo": "https://vodovitrodym.ua/favicon.svg",
+      "url": "https://vodovitrodym.com.ua/",
+      "logo": "https://vodovitrodym.com.ua/favicon.svg",
       "image": "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1200&q=80",
       "description": "Український виробник жестяних та оцинкованих виробів: водовідведення, вентиляція, димоходи, покрівельні елементи.",
       "telephone": "+38-050-751-92-43",
@@ -54,7 +54,7 @@
     },
     {
       "@type": "FAQPage",
-      "@id": "https://vodovitrodym.ua/#faq",
+      "@id": "https://vodovitrodym.com.ua/#faq",
       "mainEntity": [
         {
           "@type": "Question",
