@@ -731,6 +731,26 @@
       color: var(--gold);
     }
 
+    a.direction-label--link {
+      display: block;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    a.direction-label--link:hover,
+    a.direction-label--link:focus-visible {
+      background: rgba(212, 175, 55, 0.22);
+      border-color: rgba(212, 175, 55, 0.65);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    a.direction-label--link:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
     .products-catalog {
       margin-top: 8px;
     }
@@ -751,6 +771,11 @@
       transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
       overflow: hidden;
       position: relative;
+    }
+
+    a.product-card {
+      text-decoration: none;
+      color: inherit;
     }
 
     .product-card::before {
@@ -779,7 +804,7 @@
 
     .product-card-thumb {
       width: 100%;
-      height: 120px;
+      height: 220px;
       object-fit: cover;
       border-radius: 14px;
       margin-bottom: 12px;
@@ -799,6 +824,15 @@
       line-height: 1.5;
       flex: 1;
       margin-bottom: 12px;
+    }
+
+    .product-card-price {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin: 0 0 12px;
+      letter-spacing: 0.02em;
     }
 
     .product-badge {
@@ -970,6 +1004,33 @@
 
     .catalog-table--compact {
       min-width: 420px;
+    }
+
+    .catalog-anchor {
+      display: block;
+      height: 0;
+      scroll-margin-top: 100px;
+    }
+
+    #vodovidvedennya,
+    #pokrivlya,
+    #povitrovody,
+    #dimokhody {
+      scroll-margin-top: 100px;
+    }
+
+    .catalog-subheading {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--gold);
+      margin: 0 0 16px;
+    }
+
+    .catalog-subheading--spaced {
+      margin-top: 40px;
     }
 
     .catalog-grid {
