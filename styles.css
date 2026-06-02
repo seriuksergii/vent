@@ -1282,6 +1282,14 @@
     }
 
     @media (max-width: 1024px) {
+      .catalog-page .page-main {
+        padding-top: calc(var(--header-h) + 20px) !important;
+      }
+
+      .catalog-page .catalog-hero {
+        margin-top: 8px !important;
+      }
+
       .products-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -1364,12 +1372,38 @@
         justify-content: center;
       }
 
+      .header-actions .btn-sm {
+        padding: 7px 12px;
+        font-size: 0.72rem;
+        gap: 6px;
+        border-radius: 40px;
+        white-space: nowrap;
+      }
+
+      .header-actions .btn-sm i {
+        font-size: 0.75rem;
+      }
+
       .nav-mobile {
         display: flex;
       }
 
       .page-main {
         padding-top: var(--header-h);
+      }
+
+      .catalog-page .page-main {
+        padding-top: calc(var(--header-h) + 30px);
+      }
+
+      .catalog-page .catalog-hero {
+        margin-top: 0 !important;
+        margin-bottom: 40px !important;
+      }
+
+      .catalog-page .catalog-hero.section {
+        margin-top: 0;
+        margin-bottom: 32px;
       }
 
       .hero.section {
@@ -1495,6 +1529,67 @@
 
       .catalog-split {
         grid-template-columns: 1fr;
+      }
+
+      .catalog-table-wrap {
+        overflow-x: visible;
+        border: 0;
+        background: transparent;
+      }
+
+      .catalog-table {
+        min-width: 0;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 10px;
+      }
+
+      .catalog-table thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+      }
+
+      .catalog-table tbody tr {
+        display: block;
+        background: var(--surface);
+        border: 1px solid rgba(212, 175, 55, 0.24);
+        border-radius: 14px;
+        padding: 10px 12px;
+      }
+
+      .catalog-table td {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        width: 100%;
+        padding: 8px 0;
+        border: 0;
+        text-align: right !important;
+        white-space: normal !important;
+      }
+
+      .catalog-table td::before {
+        content: attr(data-label);
+        color: #bdd4f0;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        text-align: left;
+        flex: 1 1 auto;
+        min-width: 42%;
+      }
+
+      .catalog-table td:first-child {
+        color: var(--gold);
+        text-align: right !important;
       }
 
       .direction-label {

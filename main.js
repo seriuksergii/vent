@@ -200,6 +200,61 @@ document.querySelectorAll('.download-price-xlsx').forEach((btn) => {
   });
 });
 
+function buildTableColumnLabels(table) {
+  const headerRows = Array.from(table.querySelectorAll('thead tr'));
+  if (!headerRows.length) return [];
+
+  const grid = [];
+  headerRows.forEach((row, rowIndex) => {
+    if (!grid[rowIndex]) grid[rowIndex] = [];
+    let colIndex = 0;
+    Array.from(row.cells).forEach((cell) => {
+      while (grid[rowIndex][colIndex]) colIndex += 1;
+      const rowSpan = Number(cell.getAttribute('rowspan') || 1);
+      const colSpan = Number(cell.getAttribute('colspan') || 1);
+      const text = cell.textContent.trim().replace(/\s+/g, ' ');
+
+      for (let r = 0; r < rowSpan; r += 1) {
+        const targetRow = rowIndex + r;
+        if (!grid[targetRow]) grid[targetRow] = [];
+        for (let c = 0; c < colSpan; c += 1) {
+          grid[targetRow][colIndex + c] = text;
+        }
+      }
+      colIndex += colSpan;
+    });
+  });
+
+  const totalCols = Math.max(...grid.map((row) => row.length));
+  const labels = [];
+
+  for (let col = 0; col < totalCols; col += 1) {
+    const chain = [];
+    for (let row = 0; row < grid.length; row += 1) {
+      const value = (grid[row][col] || '').trim();
+      if (value && chain[chain.length - 1] !== value) chain.push(value);
+    }
+    labels.push(chain.join(' · '));
+  }
+
+  return labels;
+}
+
+function annotateCatalogTableCells() {
+  document.querySelectorAll('.catalog-table').forEach((table) => {
+    const labels = buildTableColumnLabels(table);
+    if (!labels.length) return;
+
+    table.querySelectorAll('tbody tr').forEach((row) => {
+      Array.from(row.cells).forEach((cell, idx) => {
+        if (labels[idx]) cell.setAttribute('data-label', labels[idx]);
+      });
+    });
+  });
+}
+
+annotateCatalogTableCells();
+
 document
   .querySelectorAll('.product-card, .manufacturer-feature')
   .forEach((card) => {
