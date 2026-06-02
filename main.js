@@ -49,14 +49,16 @@ const burgerBtn = document.getElementById('burgerBtn');
 const navMobile = document.getElementById('navMobile');
 const navClose = document.getElementById('navClose');
 
-window.addEventListener(
-  'scroll',
-  () => {
-    siteHeader.classList.toggle('is-scrolled', window.scrollY > 24);
-  },
-  { passive: true },
-);
-siteHeader.classList.toggle('is-scrolled', window.scrollY > 24);
+if (siteHeader) {
+  window.addEventListener(
+    'scroll',
+    () => {
+      siteHeader.classList.toggle('is-scrolled', window.scrollY > 24);
+    },
+    { passive: true },
+  );
+  siteHeader.classList.toggle('is-scrolled', window.scrollY > 24);
+}
 
 function openMobileNav() {
   navMobile.classList.add('is-open');
@@ -74,17 +76,19 @@ function closeMobileNav() {
   document.body.style.overflow = '';
 }
 
-burgerBtn.addEventListener('click', () => {
-  if (navMobile.classList.contains('is-open')) {
-    closeMobileNav();
-  } else {
-    openMobileNav();
-  }
-});
-navClose.addEventListener('click', closeMobileNav);
-document.querySelectorAll('.nav-mobile-link').forEach((link) => {
-  link.addEventListener('click', closeMobileNav);
-});
+if (burgerBtn && navMobile && navClose) {
+  burgerBtn.addEventListener('click', () => {
+    if (navMobile.classList.contains('is-open')) {
+      closeMobileNav();
+    } else {
+      openMobileNav();
+    }
+  });
+  navClose.addEventListener('click', closeMobileNav);
+  document.querySelectorAll('.nav-mobile-link').forEach((link) => {
+    link.addEventListener('click', closeMobileNav);
+  });
+}
 
 const sections = document.querySelectorAll('.section');
 const revealSelectors =
@@ -158,32 +162,42 @@ function triggerFileDownload(blob, filename) {
   URL.revokeObjectURL(url);
 }
 
-async function downloadPriceList() {
-  const priceFiles = [
-    { path: 'price.pdf', name: 'vodovitrodym_price.pdf' },
-    { path: 'price.html', name: 'vodovitrodym_price.html' },
-  ];
-  for (const { path, name } of priceFiles) {
-    try {
-      const res = await fetch(path);
-      if (res.ok) {
-        triggerFileDownload(await res.blob(), name);
-        return;
-      }
-    } catch (_) {
-      /* наступний файл */
-    }
-  }
-  const link = document.createElement('a');
-  link.href = 'price.html';
-  link.download = 'vodovitrodym_price.html';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+async function downloadFile(path, name) {
+  const res = await fetch(path);
+  if (!res.ok) throw new Error('download failed');
+  triggerFileDownload(await res.blob(), name);
 }
 
 document.querySelectorAll('.download-price').forEach((btn) => {
-  btn.addEventListener('click', downloadPriceList);
+  btn.addEventListener('click', async () => {
+    try {
+      await downloadFile('price.pdf', 'prays-zhestyani-vyroby-opt-roznica.pdf');
+    } catch (_) {
+      // fallback: якщо PDF недоступний, пробуємо HTML
+      const link = document.createElement('a');
+      link.href = 'price.html';
+      link.download = 'prays.html';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  });
+});
+
+document.querySelectorAll('.download-price-xlsx').forEach((btn) => {
+  btn.addEventListener('click', async () => {
+    try {
+      await downloadFile('price.xlsx', 'prays-zhestyani-vyroby-opt-roznica.xlsx');
+    } catch (_) {
+      // fallback: відкриваємо файл як звичайне посилання
+      const link = document.createElement('a');
+      link.href = 'price.xlsx';
+      link.download = 'prays-zhestyani-vyroby-opt-roznica.xlsx';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  });
 });
 
 document
