@@ -11,6 +11,25 @@
 
     gtag('config', 'AW-18188431326');
   </script>
+  <!-- Event snippet for Page view (1) conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+  <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof (url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+        'send_to': 'AW-18188431326/SNojCMHZhrgcEN7f9eBD',
+        'value': 1.0,
+        'currency': 'UAH',
+        'event_callback': callback
+      });
+      return false;
+    }
+  </script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Оцинковані жолоби, вентиляція та димоходи Харків | ВодоВітроДим — виробник</title>
