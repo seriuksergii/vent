@@ -2,34 +2,6 @@
 <html lang="uk">
 
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18188431326"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'AW-18188431326');
-  </script>
-  <!-- Event snippet for Page view (1) conversion page
-In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
-  <script>
-    function gtag_report_conversion(url) {
-      var callback = function () {
-        if (typeof (url) != 'undefined') {
-          window.location = url;
-        }
-      };
-      gtag('event', 'conversion', {
-        'send_to': 'AW-18188431326/SNojCMHZhrgcEN7f9eBD',
-        'value': 1.0,
-        'currency': 'UAH',
-        'event_callback': callback
-      });
-      return false;
-    }
-  </script>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Оцинковані жолоби, вентиляція та димоходи Харків | ВодоВітроДим — виробник</title>
@@ -60,19 +32,23 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
   <meta name="twitter:description"
     content="Жолоби, вентиляція, димоходи — власне виробництво. Прайс, доставка по Україні.">
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1200&q=80">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
-  <link rel="icon" href="/favicon-16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/favicon.png" sizes="any">
+  
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="critical.min.css">
+  <link rel="preload" as="image" href="/images/hero-900.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" href="webfonts/manrope-600-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="webfonts/unbounded-700-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fonts.min.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="icons.min.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="styles.min.css" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="fonts.min.css">
+    <link rel="stylesheet" href="icons.min.css">
+    <link rel="stylesheet" href="styles.min.css">
+  </noscript>
   <script type="application/ld+json" id="schemaOrg">
 {
   "@context": "https://schema.org",
@@ -97,7 +73,7 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
       "@id": "https://vodovitrodym.com.ua/#organization",
       "name": "ВодоВітроДим",
       "url": "https://vodovitrodym.com.ua/",
-      "logo": "https://vodovitrodym.com.ua/favicon.svg",
+      "logo": "https://vodovitrodym.com.ua/favicon.png",
       "image": "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1200&q=80",
       "description": "Український виробник жестяних та оцинкованих виробів: водовідведення, вентиляція, димоходи, покрівельні елементи.",
       "telephone": "+38-050-751-92-43",
@@ -270,7 +246,7 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
     </div>
   </header>
 
-  <nav class="nav-mobile" id="navMobile" aria-hidden="true" aria-label="Мобільне меню">
+  <nav class="nav-mobile" id="navMobile" hidden aria-label="Мобільне меню">
     <button type="button" class="nav-mobile-close" id="navClose" aria-label="Закрити"><i
         class="fas fa-times"></i></button>
     <a href="#aboutSection" class="nav-mobile-link">Про нас</a>
@@ -303,9 +279,14 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
           </div>
         </div>
         <div class="hero-visual">
-          <img src="./hero_img.png"
-            alt="Виробництво оцинкованих жолобів, повітроводів і димоходів — завод ВодоВітроДим, Харків" width="900"
-            height="600" loading="eager" fetchpriority="high" decoding="async">
+          <picture>
+            <source type="image/webp"
+              srcset="images/hero-600.webp 600w, images/hero-900.webp 900w"
+              sizes="(max-width: 900px) 100vw, min(540px, 48vw)">
+            <img src="images/hero-900.webp"
+              alt="Виробництво оцинкованих жолобів, повітроводів і димоходів — завод ВодоВітроДим, Харків"
+              width="900" height="600" loading="eager" fetchpriority="high" decoding="async">
+          </picture>
           <div class="hero-visual-overlay" aria-hidden="true"></div>
           <div class="hero-visual-icons" aria-hidden="true">
             <span><i class="fas fa-water"></i></span>
@@ -403,7 +384,11 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
         <div class="products-catalog">
           <div class="products-grid">
             <a href="catalog.html#pipe-table-heading" class="product-card">
-              <img class="product-card-thumb" src="00.png" alt="Труба 1 метр" loading="lazy" width="400" height="240">
+              <picture>
+                <source type="image/webp" srcset="images/00-640.webp">
+                <img class="product-card-thumb" src="images/00-640.webp" alt="Труба 1 метр" loading="lazy" width="400"
+                  height="280">
+              </picture>
               <h3>Труба 1 м</h3>
               <p class="product-card-desc">Круглі труби для димоходів і вентиляційних систем.</p>
               <p class="product-card-price">Опт від 129 грн</p>
@@ -413,7 +398,11 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
               </div>
             </a>
             <a href="catalog.html#otvod-heading" class="product-card">
-              <img class="product-card-thumb" src="11.png" alt="Відвід 90°" loading="lazy" width="400" height="240">
+              <picture>
+                <source type="image/webp" srcset="images/11-640.webp">
+                <img class="product-card-thumb" src="images/11-640.webp" alt="Відвід 90°" loading="lazy" width="400"
+                  height="280">
+              </picture>
               <h3>Відвід 90°</h3>
               <p class="product-card-desc">Фасонний елемент для повороту траси димохідного каналу.</p>
               <p class="product-card-price">Опт від 96 грн</p>
@@ -423,8 +412,11 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
               </div>
             </a>
             <a href="catalog.html#troynyk-heading" class="product-card">
-              <img class="product-card-thumb" src="22.png" alt="Трійник із заглушкою" loading="lazy" width="400"
-                height="240">
+              <picture>
+                <source type="image/webp" srcset="images/22-640.webp">
+                <img class="product-card-thumb" src="images/22-640.webp" alt="Трійник із заглушкою" loading="lazy"
+                  width="400" height="280">
+              </picture>
               <h3>Трійник із заглушкою</h3>
               <p class="product-card-desc">Розгалуження для димоходу із зручним доступом для ревізії.</p>
               <p class="product-card-price">Опт від 120 грн</p>
@@ -434,7 +426,11 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
               </div>
             </a>
             <a href="catalog.html#zont-heading" class="product-card">
-              <img class="product-card-thumb" src="33.png" alt="Зонт на трубу" loading="lazy" width="400" height="240">
+              <picture>
+                <source type="image/webp" srcset="images/33-640.webp">
+                <img class="product-card-thumb" src="images/33-640.webp" alt="Зонт на трубу" loading="lazy" width="400"
+                  height="280">
+              </picture>
               <h3>Зонт</h3>
               <p class="product-card-desc">Захист каналу від опадів і сміття для стабільної роботи системи.</p>
               <p class="product-card-price">Опт від 55 грн</p>
@@ -444,7 +440,11 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
               </div>
             </a>
             <a href="catalog.html#kolino-heading" class="product-card">
-              <img class="product-card-thumb" src="44.png" alt="Коліно 45°" loading="lazy" width="400" height="240">
+              <picture>
+                <source type="image/webp" srcset="images/44-640.webp">
+                <img class="product-card-thumb" src="images/44-640.webp" alt="Коліно 45°" loading="lazy" width="400"
+                  height="280">
+              </picture>
               <h3>Коліно 45°</h3>
               <p class="product-card-desc">Плавний поворот каналу для вентиляційних та димохідних систем.</p>
               <p class="product-card-price">Опт від 96 грн</p>
@@ -454,8 +454,11 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
               </div>
             </a>
             <a href="catalog.html#flyuger-heading" class="product-card">
-              <img class="product-card-thumb" src="55.png" alt="Флюгер на димохід" loading="lazy" width="400"
-                height="240">
+              <picture>
+                <source type="image/webp" srcset="images/110-640.webp">
+                <img class="product-card-thumb" src="images/110-640.webp" alt="Флюгер на димохід" loading="lazy"
+                  width="400" height="280">
+              </picture>
               <h3>Флюгер</h3>
               <p class="product-card-desc">Підсилює тягу та захищає канал від зворотного задування.</p>
               <p class="product-card-price">Опт від 320 грн</p>
@@ -464,19 +467,26 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
                 <span class="product-tag">Тяга</span>
               </div>
             </a>
-            <a href="catalog.html#vodovidvedennya" class="product-card">
-              <img class="product-card-thumb" src="66.png" alt="Дощоприймач з патрубком" loading="lazy" width="400"
-                height="240">
-              <h3>Дощоприймач з патрубком</h3>
-              <p class="product-card-desc">Елемент системи водовідведення для ефективного збору дощової води.</p>
-              <p class="product-card-price">Опт від 95 грн</p>
+            <a href="catalog.html#voronka-heading" class="product-card">
+              <picture>
+                <source type="image/webp" srcset="images/55-640.webp">
+                <img class="product-card-thumb" src="images/55-640.webp" alt="Воронка" loading="lazy" width="400"
+                  height="280">
+              </picture>
+              <h3>Воронка</h3>
+              <p class="product-card-desc">З’єднує жолоб із водостічною трубою для відведення дощової води з даху.</p>
+              <p class="product-card-price">Опт від 125 грн</p>
               <div class="product-tags">
                 <span class="product-tag">Водовідведення</span>
-                <span class="product-tag">Жолоби</span>
+                <span class="product-tag">Ø100–150</span>
               </div>
             </a>
             <a href="catalog.html#pokrivlya" class="product-card">
-              <img class="product-card-thumb" src="77.png" alt="Коник 2 метри" loading="lazy" width="400" height="240">
+              <picture>
+                <source type="image/webp" srcset="images/77-640.webp">
+                <img class="product-card-thumb product-card-thumb--right" src="images/77-640.webp" alt="Коник 2 метри" loading="lazy" width="400"
+                  height="280">
+              </picture>
               <h3>Коник 2 м</h3>
               <p class="product-card-desc">Покрівельний елемент для закриття стиків скатів даху.</p>
               <p class="product-card-price">Опт від 175 грн</p>
@@ -654,6 +664,7 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
     </div>
   </main>
 
+  <script src="analytics.min.js" defer></script>
   <script src="main.js" defer></script>
 </body>
 

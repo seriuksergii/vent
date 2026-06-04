@@ -15,7 +15,7 @@
       --header-h: 72px;
       --radius: 24px;
       --font-display: 'Unbounded', 'Manrope', sans-serif;
-      --font-body: 'Manrope', 'Inter', sans-serif;
+      --font-body: 'Manrope', system-ui, sans-serif;
     }
 
 * {
@@ -494,6 +494,13 @@
       box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.6);
     }
 
+    .hero-visual picture {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 380px;
+    }
+
     .hero-visual img {
       width: 100%;
       max-width: 100%;
@@ -802,13 +809,23 @@
       border-color: rgba(212, 175, 55, 0.5);
     }
 
+    .product-card picture {
+      display: block;
+      width: 100%;
+    }
+
     .product-card-thumb {
       width: 100%;
-      height: 220px;
+      height: 280px;
       object-fit: cover;
+      object-position: center;
       border-radius: 14px;
       margin-bottom: 12px;
       border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .product-card-thumb--right {
+      object-position: right;
     }
 
     .product-card h3 {
@@ -871,170 +888,6 @@
       background: rgba(30, 35, 44, 0.9);
       color: #BDD4F0;
       border: 1px solid rgba(212, 175, 55, 0.18);
-    }
-
-    /* ——— Catalog page ——— */
-    .catalog-page .catalog-hero {
-      margin-top: 22px !important;
-      margin-bottom: 100px !important;
-    }
-
-    .catalog-page .page-main {
-      padding-top: calc(var(--header-h) + 72px);
-    }
-
-    .catalog-hero__content {
-      max-width: 820px;
-    }
-
-    .catalog-photo-grid {
-      display: grid;
-      grid-template-columns: minmax(260px, 380px);
-      gap: 14px;
-    }
-
-    .catalog-photo-grid--narrow {
-      max-width: 380px;
-      margin-bottom: 24px;
-    }
-
-    .catalog-photo-grid--three {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      max-width: none;
-      margin-bottom: 24px;
-    }
-
-    .catalog-photo-grid--three .catalog-photo-card img {
-      height: 360px;
-    }
-
-    .catalog-page .catalog-hero .catalog-photo-grid {
-      margin-top: 44px !important;
-    }
-
-    .catalog-page .catalog-hero + .section {
-      margin-top: 24px !important;
-    }
-
-    .catalog-photo-card {
-      margin: 0;
-      background: var(--surface);
-      border: 1px solid rgba(212, 175, 55, 0.24);
-      border-radius: 16px;
-      overflow: hidden;
-    }
-
-    .catalog-photo-card img {
-      width: 100%;
-      height: 140px;
-      object-fit: cover;
-      display: block;
-      background: rgba(30, 35, 44, 0.8);
-    }
-
-    .catalog-photo-card figcaption {
-      margin: 0;
-      padding: 4px 12px 6px;
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-
-    .catalog-photo-card--single img {
-      height: 350px;
-    }
-
-    .catalog-split {
-      display: grid;
-      grid-template-columns: minmax(260px, 380px) 1fr;
-      gap: 18px;
-      align-items: start;
-    }
-
-    .catalog-table-wrap {
-      width: 100%;
-      overflow-x: auto;
-      border-radius: 20px;
-      border: 1px solid rgba(212, 175, 55, 0.24);
-      background: var(--surface);
-    }
-
-    .catalog-table {
-      width: 100%;
-      min-width: 980px;
-      border-collapse: collapse;
-      font-size: 0.9rem;
-    }
-
-    .catalog-table th,
-    .catalog-table td {
-      padding: 14px 16px;
-      text-align: left;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      vertical-align: top;
-    }
-
-    .catalog-table th {
-      background: rgba(212, 175, 55, 0.14);
-      color: var(--gold);
-      font-family: var(--font-display);
-      font-size: 0.75rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    .catalog-table td:first-child {
-      font-family: var(--font-display);
-      font-weight: 700;
-      color: var(--gold);
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    .catalog-table td:not(:first-child) {
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    .catalog-table tbody tr:hover {
-      background: rgba(212, 175, 55, 0.07);
-    }
-
-    .catalog-table--compact {
-      min-width: 420px;
-    }
-
-    .catalog-anchor {
-      display: block;
-      height: 0;
-      scroll-margin-top: 100px;
-    }
-
-    #vodovidvedennya,
-    #pokrivlya,
-    #povitrovody,
-    #dimokhody {
-      scroll-margin-top: 100px;
-    }
-
-    .catalog-subheading {
-      font-family: var(--font-display);
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--gold);
-      margin: 0 0 16px;
-    }
-
-    .catalog-subheading--spaced {
-      margin-top: 40px;
-    }
-
-    .catalog-grid {
-      grid-template-columns: repeat(3, 1fr);
     }
 
     /* ——— Why + Steps ——— */
