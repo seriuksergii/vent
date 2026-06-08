@@ -49,6 +49,21 @@ const burgerBtn = document.getElementById('burgerBtn');
 const navMobile = document.getElementById('navMobile');
 const navClose = document.getElementById('navClose');
 
+function syncHeaderHeightVar() {
+  if (!siteHeader) return;
+  const root = document.documentElement;
+  const apply = () => {
+    const h = Math.ceil(siteHeader.getBoundingClientRect().height);
+    if (h > 0) root.style.setProperty('--header-real-h', `${h}px`);
+  };
+  apply();
+  window.addEventListener('resize', apply, { passive: true });
+  window.addEventListener('orientationchange', apply, { passive: true });
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(apply).catch(() => {});
+  }
+}
+
 function initScrollHeader() {
   if (!siteHeader) return;
   const apply = () => {
@@ -158,7 +173,6 @@ function initIntersectionObservers() {
 
 function initDeferredEnhancements() {
   const run = () => {
-    annotateCatalogTableCells();
     document
       .querySelectorAll('.product-card, .manufacturer-feature')
       .forEach((card) => {
@@ -180,8 +194,52 @@ function initDeferredEnhancements() {
   }
 }
 
+function initLinkPrefetch() {
+  const prefetched = new Set();
+
+  function prefetchPage(url) {
+    const path = url.pathname + url.search;
+    if (prefetched.has(path)) return;
+    prefetched.add(path);
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = path;
+    document.head.appendChild(link);
+  }
+
+  document.querySelectorAll('a[href]').forEach((anchor) => {
+    const href = anchor.getAttribute('href');
+    if (
+      !href ||
+      href.startsWith('#') ||
+      href.startsWith('tel:') ||
+      href.startsWith('mailto:')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(href, window.location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== window.location.origin || url.pathname.endsWith('.pdf')) {
+      return;
+    }
+
+    const warm = () => prefetchPage(url);
+    anchor.addEventListener('pointerenter', warm, { passive: true });
+    anchor.addEventListener('focus', warm, { passive: true });
+  });
+}
+
 function initDom() {
+  syncHeaderHeightVar();
   initScrollHeader();
+  initLinkPrefetch();
+  annotateCatalogTableCells();
   initSectionAnimations();
   initIntersectionObservers();
   initDeferredEnhancements();

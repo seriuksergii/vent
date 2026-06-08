@@ -8,6 +8,8 @@
   --text: #EFF3F6;
   --muted: #9aaebf;
   --header-h: 72px;
+  --header-real-h: var(--header-h);
+  --header-gap: 24px;
   --radius: 24px;
   --font-display: "Unbounded", "Manrope", system-ui, sans-serif;
   --font-body: "Manrope", system-ui, sans-serif;
@@ -32,6 +34,7 @@ body {
   font-family: var(--font-body);
   line-height: 1.5;
   overflow-x: hidden;
+  padding-top: calc(var(--header-real-h) + var(--header-gap) + env(safe-area-inset-top));
 }
 
 .orb {
@@ -174,11 +177,11 @@ picture {
 }
 
 .page-main {
-  padding-top: calc(var(--header-h) + 24px);
+  padding-top: 0;
 }
 
 .catalog-page .page-main {
-  padding-top: calc(var(--header-h) + 72px);
+  --header-gap: 30px;
 }
 
 .hero {
