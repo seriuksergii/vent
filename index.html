@@ -5,6 +5,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <style>html,body{background:#0A0C10;color:#EFF3F6}</style>
+  <script>
+    (function () {
+      var other = '/catalog.html';
+      window.__pageCache = window.__pageCache || new Map();
+      if (!window.__pageCache.has(other)) {
+        fetch(other).then(function (r) { return r.text(); }).then(function (t) {
+          window.__pageCache.set(other, t);
+        });
+      }
+    })();
+  </script>
+  <script type="speculationrules">
+    {"prefetch":[{"source":"document","where":{"href_matches":["/catalog.html","/catalog.html?*","/catalog.html#*"]},"eagerness":"eager"}],"prerender":[{"source":"document","where":{"href_matches":["/catalog.html","/catalog.html?*"]},"eagerness":"moderate"}]}
+  </script>
   <title>Оцинковані жолоби, вентиляція та димоходи Харків | ВодоВітроДим — виробник</title>
   <meta name="description"
     content="ВодоВітроДим — виробник оцинкованих систем водовідведення, повітроводів і димоходів у Харкові. Власний цех, З-275/350, монтаж, доставка по Україні. Завантажте прайс.">
@@ -37,19 +51,19 @@
   
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="stylesheet" href="critical.min.css?v=20260608-5">
+  <link rel="stylesheet" href="critical.min.css?v=20260608-6">
+  <link rel="preload" href="catalog.min.css?v=20260608-6" as="style">
   <link rel="prefetch" href="catalog.html">
-  <link rel="prefetch" href="catalog.min.css?v=20260608-5" as="style">
   <link rel="preload" as="image" href="/images/hero-900.webp" type="image/webp" fetchpriority="high">
   <link rel="preload" href="webfonts/manrope-600-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="webfonts/unbounded-700-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.min.css?v=20260608-5" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="fonts.min.css?v=20260608-5" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="icons.min.css?v=20260608-5" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="styles.min.css?v=20260608-6" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="fonts.min.css?v=20260608-6" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="icons.min.css?v=20260608-6" media="print" onload="this.media='all'">
   <noscript>
-    <link rel="stylesheet" href="fonts.min.css?v=20260608-5">
-    <link rel="stylesheet" href="icons.min.css?v=20260608-5">
-    <link rel="stylesheet" href="styles.min.css?v=20260608-5">
+    <link rel="stylesheet" href="fonts.min.css?v=20260608-6">
+    <link rel="stylesheet" href="icons.min.css?v=20260608-6">
+    <link rel="stylesheet" href="styles.min.css?v=20260608-6">
   </noscript>
 </head>
 
@@ -104,7 +118,7 @@
 
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
-      <a href="https://vodovitrodym.com.ua/" class="logo" aria-label="ВодоВітроДим — на головну">
+      <a href="/" class="logo" aria-label="ВодоВітроДим — на головну">
         <span class="logo__name">ВодоВітроДим</span>
         <p>оцинковані вироби · Харків</p>
       </a>
@@ -666,8 +680,8 @@
   ]
 }
   </script>
-  <script src="analytics.min.js?v=20260608-5" defer></script>
-  <script src="main.js?v=20260608-5" defer></script>
+  <script src="analytics.min.js?v=20260608-6" defer></script>
+  <script src="main.js?v=20260608-6" defer></script>
 </body>
 
 </html>
