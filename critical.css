@@ -24,6 +24,7 @@
 }
 
 html {
+  background: var(--bg);
   overflow-x: hidden;
   scroll-padding-top: calc(var(--header-h) + 16px);
 }
@@ -191,7 +192,9 @@ picture {
   align-items: center;
 }
 
-.hero.section {
+.hero.section,
+.section.visible,
+.trust-strip.section {
   opacity: 1;
   transform: none;
 }

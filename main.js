@@ -230,8 +230,9 @@ function initLinkPrefetch() {
     }
 
     const warm = () => prefetchPage(url);
-    anchor.addEventListener('pointerenter', warm, { passive: true });
-    anchor.addEventListener('focus', warm, { passive: true });
+    ['pointerenter', 'focus', 'touchstart', 'mousedown'].forEach((type) => {
+      anchor.addEventListener(type, warm, { passive: true });
+    });
   });
 }
 
