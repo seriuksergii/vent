@@ -1,128 +1,32 @@
 /** Замініть на ваш реальний домен перед індексацією в Google Search Console */
 const SITE_URL = 'https://vodovitrodym.com.ua';
-const ASSET_V = '20260608-6';
 
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
 
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  navigator.serviceWorker.getRegistrations().then((regs) => {
+    regs.forEach((reg) => reg.unregister());
   });
+  if ('caches' in window) {
+    caches.keys().then((keys) => Promise.all(keys.map((key) => caches.delete(key))));
+  }
 }
 
-const pageCache = new Map();
 let initAbort = new AbortController();
 let sectionObserver = null;
 let countersDone = false;
-
-function normalizePath(pathname) {
-  if (!pathname || pathname === '/' || /\/index\.html$/i.test(pathname)) return '/';
-  return pathname;
-}
-
-function isAppPage(pathname) {
-  const path = normalizePath(pathname);
-  return path === '/' || path === '/catalog.html';
-}
-
-function ensureStylesheet(href) {
-  const base = href?.split('?')[0];
-  if (!base || document.querySelector(`link[rel="stylesheet"][href^="${base}"]`)) return;
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = href;
-  document.head.appendChild(link);
-}
-
-async function fetchPage(path) {
-  const key = normalizePath(path);
-  if (pageCache.has(key)) return pageCache.get(key);
-
-  const response = await fetch(key === '/' ? '/' : key, { credentials: 'same-origin' });
-  if (!response.ok) return null;
-
-  const html = await response.text();
-  pageCache.set(key, html);
-  return html;
-}
-
-function warmOppositePage() {
-  const other = normalizePath(location.pathname) === '/' ? '/catalog.html' : '/';
-  fetchPage(other).catch(() => {});
-  if (other === '/catalog.html') {
-    ensureStylesheet(`catalog.min.css?v=${ASSET_V}`);
-  }
-}
-
-function updateMetaFromDoc(doc) {
-  document.title = doc.title;
-
-  const description = doc.querySelector('meta[name="description"]');
-  if (description) {
-    let meta = document.querySelector('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.name = 'description';
-      document.head.appendChild(meta);
-    }
-    meta.content = description.content;
-  }
-
-  const canonical = document.getElementById('canonicalUrl');
-  const sourceCanonical = doc.getElementById('canonicalUrl');
-  if (canonical && sourceCanonical) {
-    canonical.href = sourceCanonical.href;
-  }
-}
-
-function scrollToHash(hash, behavior = 'auto') {
-  if (!hash) {
-    window.scrollTo({ top: 0, behavior });
-    return;
-  }
-  const target = document.querySelector(hash);
-  if (target) {
-    target.scrollIntoView({ behavior, block: 'start' });
-  } else {
-    window.scrollTo({ top: 0, behavior });
-  }
-}
-
-async function navigateTo(path, hash = '', push = true) {
-  const targetPath = normalizePath(path);
-  const html = await fetchPage(targetPath);
-  if (!html) {
-    location.href = targetPath + hash;
-    return;
-  }
-
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  doc.querySelectorAll('link[rel="stylesheet"][href]').forEach((link) => {
-    ensureStylesheet(link.getAttribute('href'));
-  });
-
-  updateMetaFromDoc(doc);
-  document.body.className = doc.body.className;
-  document.body.innerHTML = doc.body.innerHTML;
-
-  if (push) {
-    history.pushState({ instantNav: true }, '', targetPath + hash);
-  }
-
-  countersDone = false;
-  initPage();
-
-  requestAnimationFrame(() => scrollToHash(hash));
-}
 
 function initPageScroll() {
   const hash = window.location.hash;
   if (!hash) {
     window.scrollTo(0, 0);
   } else {
-    scrollToHash(hash);
+    const target = document.querySelector(hash);
+    if (target) {
+      target.scrollIntoView({ block: 'start' });
+    }
   }
 }
 
@@ -295,53 +199,6 @@ function initDeferredEnhancements() {
   }
 }
 
-function initInstantNavigation() {
-  document.addEventListener(
-    'click',
-    async (event) => {
-      if (event.defaultPrevented) return;
-
-      const anchor = event.target.closest('a[href]');
-      if (!anchor || anchor.target === '_blank' || event.metaKey || event.ctrlKey || event.shiftKey) {
-        return;
-      }
-
-      let url;
-      try {
-        url = new URL(anchor.href, location.href);
-      } catch {
-        return;
-      }
-
-      if (url.origin !== location.origin || url.pathname.endsWith('.pdf')) return;
-
-      const targetPath = normalizePath(url.pathname);
-      const currentPath = normalizePath(location.pathname);
-
-      if (targetPath === currentPath) {
-        if (url.hash) {
-          event.preventDefault();
-          scrollToHash(url.hash, 'smooth');
-          history.pushState({ instantNav: true }, '', targetPath + url.search + url.hash);
-        }
-        return;
-      }
-
-      if (!isAppPage(targetPath)) return;
-
-      event.preventDefault();
-      await navigateTo(targetPath, url.hash);
-    },
-    true,
-  );
-
-  window.addEventListener('popstate', () => {
-    const path = normalizePath(location.pathname);
-    if (!isAppPage(path)) return;
-    navigateTo(path, location.hash, false);
-  });
-}
-
 function initPage() {
   initAbort.abort();
   initAbort = new AbortController();
@@ -459,18 +316,5 @@ function annotateCatalogTableCells() {
   });
 }
 
-(function bootstrap() {
-  if (window.__pageCache instanceof Map) {
-    window.__pageCache.forEach((html, key) => pageCache.set(key, html));
-  }
-
-  const path = normalizePath(location.pathname);
-  pageCache.set(path, document.documentElement.outerHTML);
-
-  initInstantNavigation();
-  initPage();
-  initPageScroll();
-
-  const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 200));
-  idle(() => warmOppositePage(), { timeout: 1500 });
-})();
+initPage();
+initPageScroll();
