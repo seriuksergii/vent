@@ -237,12 +237,7 @@ document.addEventListener('click', async (event) => {
     try {
       await downloadFile('price.pdf', 'prays-zhestyani-vyroby-opt-roznica.pdf');
     } catch (_) {
-      const link = document.createElement('a');
-      link.href = 'price.html';
-      link.download = 'prays.html';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      window.open('price.pdf', '_blank', 'noopener');
     }
     return;
   }
